@@ -1,58 +1,26 @@
-var timeConsumingFunction = (params) => {
+var timeConsumingFunction = (params, callback) => {
 
-    return new Promise(async (resolve, reject) => {
+    try {
+        setTimeout(() => {
+            console.log("Timer fun triggered");
+            callback(null, "success");
+        }, 1000);
 
-        try {
-            setTimeout(() => {
-            //     console.log("Timer fun triggered");
-            //     resolve("success");
-
-            var N = 100;
-            var foo = Array.apply(null, { length: N }).map(Number.call, Number)
-
-            // foo.forEach(e => {
-            //     console.log(e);
-
-            // });
-
-            for (let index = 0; index < foo.length; index++) {
-                const element = foo[index];
-                console.log(element);
-                //timeConsumingFunction();
-            }
-
-           
-
-
-
-
-            }, 1000);
-
-           
-            resolve("success");
-
-            
-
-        } catch (error) {
-            reject(error);
-        }
-
-    });
+    } catch (error) {
+        callback(error, null);
+    }
 
 };
 
-(() => {
-    // var result =  await timeConsumingFunction();
-    // console.log("After function call", result);
+(async () => {
+    var t = await timeConsumingFunction(null, (err, result) => {
+        if (err) {
+            console.err(err);
+            return err;
+        }
 
-    timeConsumingFunction()
-        .then(result => {
-            console.log(result);
-
-        })
-        .catch(err => {
-            console.error(result);
-
-        });
-    console.log("After function call");
+        console.log(result);
+        return result;
+    });
+    console.log("-----------", t);
 })();
