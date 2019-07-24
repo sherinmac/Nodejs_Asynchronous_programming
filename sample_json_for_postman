@@ -1,0 +1,10 @@
+{"query":"{greeting students { id firstName lastName}}"}
+
+
+
+
+
+
+
+
+
