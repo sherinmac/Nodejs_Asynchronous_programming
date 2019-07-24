@@ -1,26 +1,16 @@
-var timeConsumingFunction = (params, callback) => {
+var t = [1, 2, 3, 4, 5, 6];
 
-    try {
-        setTimeout(() => {
-            console.log("Timer fun triggered");
-            callback(null, "success");
-        }, 1000);
-
-    } catch (error) {
-        callback(error, null);
+var performAPICall = function (x, cb) {
+    console.log(t[x]);
+    x++;
+    if (x < 6) {
+        cb(x, cb);
     }
 
-};
+}
+console.log("ttttttttt");
 
-(async () => {
-    var t = await timeConsumingFunction(null, (err, result) => {
-        if (err) {
-            console.err(err);
-            return err;
-        }
-
-        console.log(result);
-        return result;
-    });
-    console.log("-----------", t);
+(() => {
+    performAPICall(0, performAPICall);
+    console.log("ttttttttt");
 })();
