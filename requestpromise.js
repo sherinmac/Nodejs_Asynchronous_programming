@@ -1,11 +1,12 @@
 var rp = require('request-promise');
 require('dotenv').config()
+var t='firstName';
 
 let studentsQuery = {
     query: `{ 
     students { 
         id
-        firstName
+        ${t}
         lastName 
     }
 }`
@@ -35,6 +36,7 @@ rp(getGraphQLQueryOption(studentsQuery))
     }).catch(function (err) {
         // POST failed...
     });
+    
 
 
 
